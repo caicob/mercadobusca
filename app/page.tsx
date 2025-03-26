@@ -132,12 +132,8 @@ export default function Home() {
         url += '&sort=price_desc';
       }
       
-      if (priceRange.min) {
-        url += `&price_min=${priceRange.min}`;
-      }
-      
-      if (priceRange.max) {
-        url += `&price_max=${priceRange.max}`;
+      if (priceRange.max || priceRange.min) {
+        url += `&price=${priceRange.min?priceRange.min:'*'}-${priceRange.max?priceRange.max:'*'}`;
       }
       
       if (freeShippingOnly) {
@@ -145,11 +141,13 @@ export default function Home() {
       }
       
       // Certificando-se de que o filtro de condição está sendo corretamente aplicado
-      if (condition !== 'all') {
-        url += `&ITEM_CONDITION=${condition}`;
+      switch (condition) {
+        case "new": url += '&ITEM_CONDITION=2230284'; break;
+        case "used": url += '&ITEM_CONDITION=2230581'; break;
+        case "refurbished": url += '&ITEM_CONDITION=2230582'; break;
       }
       
-      // Adicionando filtros selecionados
+            // Adicionando filtros selecionados
       Object.entries(selectedFilters).forEach(([id, values]) => {
         if (values && values.length > 0) {
           values.forEach(value => {
