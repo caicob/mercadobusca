@@ -120,7 +120,7 @@ export default function Home() {
     setAvailableFilters([]);
     
     try {
-      let url = `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(searchTerm)}`;
+      let url = `https://hubiss.com.br/true-sort?q=${encodeURIComponent(searchTerm)}`;
       
       if (selectedCategory) {
         url += `&category=${selectedCategory}`;
